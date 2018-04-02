@@ -93,7 +93,10 @@ module.exports = function (ctx) {
         'QTh',
         'QTr',
         'QTd',
-        'QTableColumns'
+        'QTableColumns',
+        'QPageSticky',
+        'QModal',
+        'QTooltip'
       ],
       directives: [
         'Ripple'
@@ -101,10 +104,11 @@ module.exports = function (ctx) {
       // Quasar plugins
       plugins: [
         'Notify', 'Cookies', 'Dialog'
-      ]
+      ],
+      i18n: 'ja'
     },
     // animations: 'all' --- includes all animations
-    animations: [],
+    animations: 'all',
     pwa: {
       cacheExt: 'js,html,css,ttf,eot,otf,woff,woff2,json,svg,gif,jpg,jpeg,png,wav,ogg,webm,flac,aac,mp4,mp3',
       manifest: {

@@ -30,7 +30,7 @@
 
     <q-page-container>
       <q-page class="q-pa-md">
-        <transition enter-active-class="animated fadeIn">
+        <transition enter-active-class="animated fadeIn" leave-active-class="animated fadeOut" mode="out-in" :duration="300">
           <router-view />
         </transition>
       </q-page>
