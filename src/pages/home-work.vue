@@ -9,14 +9,12 @@
       </div>
     </div>
     <q-modal v-model="opened" :content-css="{minWidth: '90vw', minHeight: '90vh'}" :no-backdrop-dismiss="true" :no-esc-dismiss="true">
-      <q-modal-layout>
+      <q-modal-layout name="homework">
         <q-toolbar slot="header">
           <q-toolbar-title>
             宿題作成
           </q-toolbar-title>
-          <q-btn color="purple-3" size="sm" round icon="code" class="q-mr-lg">
-            <q-tooltip anchor="bottom right" self="top left">問題ソースコードを追加</q-tooltip>
-          </q-btn>
+
           <q-btn color="red-6" size="sm" round icon="power settings new" @click="closeHomework">
             <q-tooltip anchor="bottom right" self="top left">閉じる</q-tooltip>
           </q-btn>
@@ -33,11 +31,13 @@
             <q-input value="宿題の詳細を記載する" rows="3" color="secondary" type="textarea" float-label="詳細*" />
           </div>
         </div>
-        <div class="row">
-          <div class="col-12 q-px-lg q-py-sm">
-
-          </div>
-        </div>
+        <q-toolbar color="secondary">
+          <q-btn color="purple-3" size="sm" round icon="code" class="q-mr-lg" @click="addCodeSnap">
+            <q-tooltip anchor="bottom right" self="top left">問題ソースコードを追加</q-tooltip>
+          </q-btn>
+          難易度:
+          <q-rating :max="5" />
+        </q-toolbar>
       </q-modal-layout>
     </q-modal>
   </article>
@@ -69,7 +69,8 @@ export default {
     },
     closeHomework() {
       this.opened = false;
-    }
+    },
+    addCodeSnap() {}
   }
 };
 </script>

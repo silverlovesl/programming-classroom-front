@@ -1,12 +1,12 @@
 // Configuration for your app
 const devEnv = {
   //apiEndpoint: '"https://eval-dev.grow-360.com"',
-  apiEndpoint: '"http://localhost:3000"',
+  apiEndpoint: '"http://localhost:3001"',
   withCredentials: 'true'
 }
 
 const prodEnv = {
-  apiEndpoint: '"http://localhost:3000"',
+  apiEndpoint: '"http://localhost:3001"',
   withCredentials: 'true'
 }
 
@@ -96,7 +96,9 @@ module.exports = function (ctx) {
         'QTableColumns',
         'QPageSticky',
         'QModal',
-        'QTooltip'
+        'QTooltip',
+        'QModalLayout',
+        'QRating'
       ],
       directives: [
         'Ripple'

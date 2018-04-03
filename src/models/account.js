@@ -5,10 +5,10 @@ export default class Account {
     this.companyId = 0;
     this.name = "";
     this.email = "";
-    this.role = 0;
+    this.role = -1;
     this.gender = true;
     this.birthday = null;
-    this.nation = 0;
+    this.nation = -1;
     this.nickName = null;
     this.avaterUrl = null;
     this.joinDate = null;

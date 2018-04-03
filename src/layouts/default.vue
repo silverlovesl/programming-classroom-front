@@ -33,6 +33,7 @@
         <transition enter-active-class="animated fadeIn" leave-active-class="animated fadeOut" mode="out-in" :duration="300">
           <router-view />
         </transition>
+
       </q-page>
     </q-page-container>
   </q-layout>
@@ -40,6 +41,7 @@
 
 <script>
 import { mapGetters } from "vuex";
+
 export default {
   name: "LayoutDefault",
   data() {
@@ -65,7 +67,26 @@ export default {
     this.$store.dispatch("account/fetchAuthAccount");
   },
   computed: {
-    ...mapGetters({ account: "account/account" })
+    ...mapGetters({
+      account: "account/account",
+      authError: "account/authError"
+    })
+  },
+  watch: {
+    authError() {
+      this.$q
+        .dialog({
+          title: "認証エラー",
+          message: "ログインし直してください。",
+          ok: true,
+          preventClose: true,
+          noBackdropDismiss: true,
+          noEscDismiss: true
+        })
+        .then(() => {
+          window.location = "/signin";
+        });
+    }
   }
 };
 </script>
