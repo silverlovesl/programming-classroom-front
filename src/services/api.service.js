@@ -7,7 +7,7 @@ let lang = "ja";
 let apiErrorHandler;
 
 export const API = axios.create({
-  baseURL: baseURL + '/api/v1/pgClassroom',
+  baseURL: baseURL + '/api/v1/programming-classroom',
   withCredentials: true,
   timeout: 20000
 });

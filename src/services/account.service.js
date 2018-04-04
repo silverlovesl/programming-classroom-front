@@ -1,7 +1,7 @@
 import { API } from './api.service'
 export const AccountService = {
   getAuthAccount() {
-    return API.get("/authAccount", {}).then(v => v.data);
+    return API.get("/auth-account", {}).then(v => v.data);
   },
 
   getAccounts() {

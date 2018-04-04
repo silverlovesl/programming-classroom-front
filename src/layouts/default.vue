@@ -17,7 +17,7 @@
     <q-layout-drawer v-model="leftDrawerOpen" :content-class="$q.theme === 'mat' ? 'bg-grey-2' : null">
       <q-list no-border link inset-delimiter>
         <q-list-header>{{account.name}}</q-list-header>
-        <q-item to="/home-work">
+        <q-item to="/homework">
           <q-item-side icon="chrome reader mode" />
           <q-item-main label="宿題" />
         </q-item>

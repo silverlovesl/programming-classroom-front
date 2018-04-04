@@ -17,7 +17,7 @@ export default [
     meta: { requiresAuth: true },
     children: [
       { path: '', component: () => import('pages/index') },
-      { path: '/home-work', component: () => import('pages/home-work') },
+      { path: '/homework', component: () => import('pages/homework') },
       { path: '/account', component: () => import('pages/account') }
     ]
   },

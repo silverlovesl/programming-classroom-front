@@ -43,6 +43,7 @@ module.exports = {
     'eqeqeq': 0,
     "no-unused-vars": 0,
     "no-multiple-empty-lines": 0,
+    'no-parsing-error': 0,
     'import/first': 0,
     'import/named': 2,
     'import/namespace': 2,
