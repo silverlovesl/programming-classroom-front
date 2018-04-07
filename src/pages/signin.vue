@@ -25,7 +25,7 @@
         </q-item>
         <q-item>
           <q-item-main class="text-center">
-            <span class="text-red" v-if="isLoginFailed">Email or password invalid</span>
+            <span class="text-red" v-if="isLoginFailed">メールアドレス or パスワードが不正</span>
           </q-item-main>
         </q-item>
       </q-list>

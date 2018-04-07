@@ -20,6 +20,8 @@ module.exports = function (ctx) {
       'vuelidate',
       'code-mirror',
       'moment',
+      'highlight',
+      'clipboard2'
     ],
     css: [
       'app.styl'
@@ -75,6 +77,7 @@ module.exports = function (ctx) {
         'QItem',
         'QItemMain',
         'QItemSide',
+        'QItemTile',
         'QCard',
         'QCard',
         'QCardTitle',
@@ -98,7 +101,15 @@ module.exports = function (ctx) {
         'QModal',
         'QTooltip',
         'QModalLayout',
-        'QRating'
+        'QRating',
+        'QBtnGroup',
+        'QTimeline',
+        'QTabs',
+        'QTab',
+        'QTabPane',
+        'QSpinner',
+        'QSpinnerGears',
+        'QScrollArea'
       ],
       directives: [
         'Ripple'

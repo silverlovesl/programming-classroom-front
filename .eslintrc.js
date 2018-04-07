@@ -41,6 +41,7 @@ module.exports = {
     "quotes": 0,
     "semi": 0,
     'eqeqeq': 0,
+    'no-extra-boolean-cast': 0,
     "no-unused-vars": 0,
     "no-multiple-empty-lines": 0,
     'no-parsing-error': 0,

@@ -1,6 +1,6 @@
 export default class ProgrammingLanguage {
   constructor() {
-    this.id = 0;
+    this.id = 1;
     this.name = "";
     this.codeMirrorName = "";
     this.highlightName = "";

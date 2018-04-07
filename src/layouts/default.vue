@@ -9,7 +9,6 @@
           プログラミング 教室
           <div slot="subtitle">{{account.roleName}}</div>
         </q-toolbar-title>
-
         <q-btn flat round dense icon="input" @click="logout" />
       </q-toolbar>
     </q-layout-header>
@@ -17,9 +16,13 @@
     <q-layout-drawer v-model="leftDrawerOpen" :content-class="$q.theme === 'mat' ? 'bg-grey-2' : null">
       <q-list no-border link inset-delimiter>
         <q-list-header>{{account.name}}</q-list-header>
+        <q-item to="/">
+          <q-item-side icon="home" />
+          <q-item-main label="マイホーム" />
+        </q-item>
         <q-item to="/homework">
           <q-item-side icon="chrome reader mode" />
-          <q-item-main label="宿題" />
+          <q-item-main label="宿題一覧" />
         </q-item>
         <q-item v-if="account.isTeacher" to="/account">
           <q-item-side icon="perm contact calendar" />
@@ -30,10 +33,9 @@
 
     <q-page-container>
       <q-page class="q-pa-md">
-        <transition enter-active-class="animated fadeIn" leave-active-class="animated fadeOut" mode="out-in" :duration="300">
-          <router-view />
-        </transition>
-
+        <!-- <transition enter-active-class="animated fadeIn" leave-active-class="animated fadeOut" mode="out-in" :duration="300"> -->
+        <router-view />
+        <!-- </transition> -->
       </q-page>
     </q-page-container>
   </q-layout>

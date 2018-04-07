@@ -12,6 +12,7 @@ export default class Account {
     this.nickName = null;
     this.avaterUrl = null;
     this.joinDate = null;
+    this.isFirstTimeLogin = true;
   }
   deserialize(input) {
     this.id = input.id;
@@ -26,6 +27,7 @@ export default class Account {
     if (input.joinDate) {
       this.joinDate = new Date(input.joinDate);
     }
+    this.isFirstTimeLogin = input.isFirstTimeLogin;
     this.nation = input.nation;
     this.nickName = input.nickName;
     this.avaterUrl = input.avaterUrl;
@@ -52,6 +54,10 @@ export default class Account {
 
   get isTeacher() {
     return this.role === 1;
+  }
+
+  get isStudent() {
+    return this.role === 0;
   }
 
   get joinDateStr() {

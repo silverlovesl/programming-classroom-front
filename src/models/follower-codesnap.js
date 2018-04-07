@@ -1,10 +1,10 @@
 import ProgrammingLanguage from './programming-language';
 import uuidv4 from 'uuid/v4';
-export default class HomeworkCodeSnap {
+export default class FollowerCodeSnap {
   constructor() {
     this.uuid = uuidv4();
     this.id = 0;
-    this.homeworkId = 0;
+    this.followerId = 0;
     this.lang = new ProgrammingLanguage();
     this.codeSnap = "";
     this.createdAt = null;
@@ -20,9 +20,10 @@ export default class HomeworkCodeSnap {
       styleSelectedText: false
     }
   }
+
   deserialize(input) {
     this.id = input.id;
-    this.homeworkId = input.homeworkId;
+    this.followerId = input.followerId;
     this.lang = new ProgrammingLanguage().deserialize(input.lang);
     this.codeSnap = input.codeSnap;
     return this;
