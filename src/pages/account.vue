@@ -25,8 +25,8 @@
               </q-item>
               <q-item>
                 <q-item-main>
-                  <q-field helper="ログインID" icon="mail" :error="$v.account.email.$error">
-                    <q-input :disabled="isUpdate" v-model="account.email" @blur="$v.account.email.$touch" type="email" clearable float-label="メールアドレス" maxlength="50" />
+                  <q-field helper="ログインID" icon="mail" :error="$v.account.email.$error || existsEmail" :error-label="existsEmail?'存在したメールアドレスです':''">
+                    <q-input :disabled="isUpdate" v-model="account.email" @blur="checkExistsEmail" type="email" clearable float-label="メールアドレス" maxlength="50" />
                   </q-field>
                 </q-item-main>
               </q-item>
@@ -62,7 +62,7 @@
               </q-item>
               <q-item>
                 <q-item-main class="text-right">
-                  <q-btn color="primary" :disabled="$v.$invalid" label="コミット" @click="commitUser"></q-btn>
+                  <q-btn color="primary" :disabled="$v.$invalid || existsEmail" label="コミット" @click="commitUser"></q-btn>
                   <q-btn color="faded" label="取消" @click="cancelEdit"></q-btn>
                 </q-item-main>
               </q-item>
@@ -85,6 +85,7 @@
 import { required, email } from "vuelidate/lib/validators";
 import Account from "../models/account";
 import { AccountService } from "../services/account.service";
+import { mapGetters } from "vuex";
 export default {
   data() {
     return {
@@ -128,6 +129,11 @@ export default {
         this.account = new Account().deserialize(v);
       });
     },
+    async checkExistsEmail(newV) {
+      this.$v.account.email.$touch();
+      this.$store.commit("account/account", this.account);
+      this.$store.dispatch("account/checkExistsEmail");
+    },
     addUser() {
       this.mode = 1;
     },
@@ -151,6 +157,9 @@ export default {
     }
   },
   computed: {
+     ...mapGetters({
+      existsEmail: "account/existsEmail"
+    }),
     isEditMode() {
       return this.mode > 0;
     },

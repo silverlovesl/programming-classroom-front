@@ -18,5 +18,9 @@ export const AccountService = {
 
   updateAccount(data) {
     return API.put("/account", data).then(v => v.data);
+  },
+
+  checkExistsEmail(email) {
+    return API.get(`/exists-email/${email}`, {}).then(v => v.data); 
   }
 }

@@ -2,16 +2,19 @@ import { AccountService } from '../../services/account.service';
 import Account from '../../models/account'
 const state = {
   account: new Account(),
-  authError: false
+  authError: false,
+  existsEmail: false
 }
 const getters = {
   account: state => state.account,
-  authError: state => state.authError
+  authError: state => state.authError,
+  existsEmail: state => state.existsEmail
 }
 
 const mutations = {
   account(state, data) { state.account = new Account().deserialize(data); },
-  authError(state, isInvalid) { state.authError = isInvalid }
+  authError(state, isInvalid) { state.authError = isInvalid },
+  existsEmail(state, data) { state.existsEmail = data }
 }
 
 const actions = {
@@ -27,6 +30,15 @@ const actions = {
     if (account) {
       ctx.commit("authError", false);
       ctx.commit("account", account);
+    }
+  },
+  async checkExistsEmail(ctx) {
+    ctx.commit("existsEmail", false);
+    console.log(ctx);
+    const result = await AccountService.checkExistsEmail(ctx.state.account.email);
+    console.log(result);
+    if (result) {
+      ctx.commit("existsEmail", true);
     }
   },
 
