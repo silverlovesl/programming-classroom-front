@@ -6,7 +6,7 @@ const devEnv = {
 }
 
 const prodEnv = {
-  apiEndpoint: '"http://localhost:3001"',
+  apiEndpoint: '"http://192.168.1.108:3001"',
   withCredentials: 'true'
 }
 
@@ -40,6 +40,7 @@ module.exports = function (ctx) {
       remove: []
     },
     build: {
+      publicPath: '/programming-classroom',
       scopeHoisting: true,
       vueRouterMode: 'history',
       env: ctx.dev ? devEnv : prodEnv,
