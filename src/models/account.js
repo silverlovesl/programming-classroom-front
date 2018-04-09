@@ -5,7 +5,7 @@ export default class Account {
     this.companyId = 0;
     this.name = "";
     this.email = "";
-    this.role = -1;
+    this.role = 0;
     this.gender = true;
     this.birthday = null;
     this.nation = -1;

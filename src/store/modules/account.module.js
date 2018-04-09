@@ -10,12 +10,11 @@ const getters = {
 }
 
 const mutations = {
-  account(state, account) { state.account = new Account().deserialize(account); },
+  account(state, data) { state.account = new Account().deserialize(data); },
   authError(state, isInvalid) { state.authError = isInvalid }
 }
 
 const actions = {
-  // 
   async fetchAuthAccount(ctx) {
     const account = await AccountService.getAuthAccount().catch(err => {
       //認証失敗時
@@ -33,6 +32,10 @@ const actions = {
 
   addAccount(ctx, data) {
     AccountService.addAccount(data);
+  },
+
+  updateAccount(ctx, data) {
+    AccountService.updateAccount(data);
   }
 }
 

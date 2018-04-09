@@ -16,7 +16,9 @@ export default class Homework {
   deserialize(input) {
     this.id = input.id;
     this.companyId = input.companyId;
-    this.owner = new Account().deserialize(input.owner);
+    if (input.owner) {
+      this.owner = new Account().deserialize(input.owner);
+    }
     this.title = input.title;
     this.detail = input.detail;
     this.ranking = input.ranking;

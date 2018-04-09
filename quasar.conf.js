@@ -21,7 +21,8 @@ module.exports = function (ctx) {
       'code-mirror',
       'moment',
       'highlight',
-      'clipboard2'
+      'clipboard2',
+      'particles'
     ],
     css: [
       'app.styl'
@@ -78,6 +79,7 @@ module.exports = function (ctx) {
         'QItemMain',
         'QItemSide',
         'QItemTile',
+        'QItemSeparator',
         'QCard',
         'QCard',
         'QCardTitle',
@@ -109,7 +111,9 @@ module.exports = function (ctx) {
         'QTabPane',
         'QSpinner',
         'QSpinnerGears',
-        'QScrollArea'
+        'QScrollArea',
+        'QChip',
+        'QSlider'
       ],
       directives: [
         'Ripple'

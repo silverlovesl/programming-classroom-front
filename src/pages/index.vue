@@ -21,7 +21,7 @@
         <q-card-title>私の回答</q-card-title>
         <q-card-main>
           <q-toolbar color="secondary">
-            <q-btn color="purple-3" size="sm" icon="code" class="q-mr-lg" @click="addCodeSnap">
+            <q-btn v-if="editing" color="purple-3" size="sm" icon="code" class="q-mr-lg" @click="addCodeSnap">
               <q-tooltip anchor="bottom right" self="top left">ソースコード追加</q-tooltip>
             </q-btn>
             <q-btn-group class="q-mr-lg">
@@ -36,9 +36,9 @@
             <q-btn size="sm" icon="done" color="amber" v-if="editing" text-color="black" @click="commitFollower">実行</q-btn>
           </q-toolbar>
           <div class="row" v-if="editing">
-            <div v-for="(cs,index) in follower.codeSnaps" :key="cs.uuidv4" class="relative-position" v-bind:class="{'col-12':showSourceAsList,'col-6':!showSourceAsList}">
+            <div v-for="(cs,index) in follower.codeSnaps" :key="cs.uuidv4" class="relative-position q-px-xs" v-bind:class="{'col-12':showSourceAsList,'col-6':!showSourceAsList}">
               <q-select float-label="言語選択" v-model="cs.lang.id" :options="pgLanguageOpts" class="q-my-sm" @input="onPGLanguageChange(cs,$refs.cmObjs[index])" />
-              <q-btn color="red-6" dense icon="delete forever" class="absolute" style="right:0px;top:15px;" @click="removeCodeSnap(index)"></q-btn>
+              <q-btn color="red-6" dense icon="delete forever" class="absolute" style="right:5px;top:15px;" @click="removeCodeSnap(index)"></q-btn>
               <codemirror ref="cmObjs" v-model="cs.codeSnap" :options="cs.options"></codemirror>
             </div>
           </div>
@@ -73,10 +73,6 @@
   </div>
 </template>
 
-<style>
-
-</style>
-
 <script>
 import { MasterService } from "../services/master.service";
 import { FollowerService } from "../services/follower.service";
@@ -86,13 +82,12 @@ import Homework from "../models/homework";
 import HomeworkCodeSnap from "../models/homework-codesnap";
 import Follower from "../models/follower";
 import FollowerCodeSnap from "../models/follower-codesnap";
+import { mapGetters } from "vuex";
 export default {
   data() {
     return {
-      pgLanguageOpts: null,
-      pgLanguages: null,
       homeworks: [],
-      follower: null,
+      // follower: null,
       isShowLoader: false,
       selectedHomework: null,
       showSourceAsList: true,
@@ -120,27 +115,23 @@ export default {
         .catch(_ => this.closeTimer());
 
       // 宿題に対する回答内容を取得する
-      FollowerService.getFollowerByHomeworkID(this.selectedHomework.id).then(
-        v => {
-          this.follower = new Follower().deserialize(v);
-        }
-      );
+      this.$store.dispatch("follower/fetchFollowByUserAndHomeworkID", {
+        userId: this.account.id,
+        homeworkId: this.selectedHomework.id
+      });
     },
     onPGLanguageChange(codeSnap, cmObj) {
       let selectedLang = this.pgLanguages.filter(
         v => v.id === codeSnap.lang.id
       )[0];
+      codeSnap.lang.name = selectedLang.name;
+      codeSnap.lang.codeMirrorName = selectedLang.codeMirrorName;
+      codeSnap.lang.highlightName = selectedLang.highlightName;
       cmObj.options.mode = selectedLang.codeMirrorName;
       cmObj.options = cmObj.options;
     },
     async fetchMasterData() {
-      //Master データ取得
-      MasterService.getProgrammingLanguages().then(v => {
-        this.pgLanguages = v.map(d => new ProgrammingLanguage().deserialize(d));
-        this.pgLanguageOpts = this.pgLanguages.map(d => {
-          return { label: d.name, value: d.id };
-        });
-      });
+      this.$store.dispatch("master/fetchLanguge");
     },
     async fetchHomeworks() {
       let _homeworks = await FollowerService.getFollowedHomeworks();
@@ -156,7 +147,6 @@ export default {
       this.follower.codeSnaps.splice(index, 1);
     },
     commitFollower() {
-      console.log(this.follower);
       FollowerService.execute(this.follower).then(v => {
         if (v) {
           this.editing = false;
@@ -169,10 +159,20 @@ export default {
       }, 500);
     }
   },
-
+  computed: {
+    ...mapGetters({
+      account: "account/account",
+      pgLanguages: "master/pgLanguages",
+      pgLanguageOpts: "master/pgLanguageOpts",
+      follower: "follower/follower"
+    })
+  },
   mounted() {
     this.fetchMasterData();
     this.fetchHomeworks();
   }
 };
 </script>
+
+<style lang="stylus">
+</style>

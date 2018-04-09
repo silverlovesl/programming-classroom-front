@@ -14,5 +14,9 @@ export const AccountService = {
 
   addAccount(data) {
     return API.post("/account", data).then(v => v.data);
+  },
+
+  updateAccount(data) {
+    return API.put("/account", data).then(v => v.data);
   }
 }

@@ -1,8 +1,8 @@
 import ProgrammingLanguage from './programming-language';
-import uuidv4 from 'uuid/v4';
+import { uid } from 'quasar'
 export default class HomeworkCodeSnap {
   constructor() {
-    this.uuid = uuidv4();
+    this.uuid = uid();
     this.id = 0;
     this.homeworkId = 0;
     this.lang = new ProgrammingLanguage();

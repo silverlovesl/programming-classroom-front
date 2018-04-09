@@ -26,7 +26,7 @@
               <q-item>
                 <q-item-main>
                   <q-field helper="ログインID" icon="mail" :error="$v.account.email.$error">
-                    <q-input v-model="account.email" @blur="$v.account.email.$touch" type="email" clearable float-label="メールアドレス" maxlength="50" />
+                    <q-input :disabled="isUpdate" v-model="account.email" @blur="$v.account.email.$touch" type="email" clearable float-label="メールアドレス" maxlength="50" />
                   </q-field>
                 </q-item-main>
               </q-item>
@@ -141,7 +141,11 @@ export default {
       this.fetchAccount();
     },
     commitUser() {
-      this.$store.dispatch("account/addAccount", this.account);
+      if (this.isUpdate) {
+        this.$store.dispatch("account/updateAccount", this.account);
+      } else {
+        this.$store.dispatch("account/addAccount", this.account);
+      }
       this.fetchAccounts();
       this.mode = 0;
     }
@@ -149,6 +153,12 @@ export default {
   computed: {
     isEditMode() {
       return this.mode > 0;
+    },
+    isAdd() {
+      return this.mode === 1;
+    },
+    isUpdate() {
+      return this.mode === 2;
     }
   }
 };

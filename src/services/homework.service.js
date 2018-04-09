@@ -1,14 +1,14 @@
 import { API } from './api.service'
 export const HomeworkService = {
-  getHomework(homeworkID) {
-    return API.get(`/homework/${homeworkID}`, {}).then(v => v.data);
+  getHomework(homeworkId) {
+    return API.get(`/homework/${homeworkId}`, {}).then(v => v.data);
   },
   getHomeworks() {
     return API.get("/homeworks", {}).then(v => v.data.data);
   },
 
-  getHomeworkCodeSnaps(homeworkID) {
-    return API.get(`/homework-codesnap/${homeworkID}`, {}).then(v => v.data.data);
+  getHomeworkCodeSnaps(homeworkId) {
+    return API.get(`/homework-codesnap/${homeworkId}`, {}).then(v => v.data.data);
   },
 
   addHomework(homework) {
