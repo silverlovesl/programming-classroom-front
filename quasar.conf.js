@@ -10,8 +10,12 @@ const prodEnv = {
   withCredentials: 'true'
 }
 
-
 module.exports = function (ctx) {
+  let publicPath = '/programming-classroom';
+  if (process.env.STAGING == 1) {
+    publicPath = '/programming-classroom-staging';
+  }
+  console.log(publicPath);
   return {
     // app plugins (/src/plugins)
     plugins: [
@@ -40,7 +44,7 @@ module.exports = function (ctx) {
       remove: []
     },
     build: {
-      publicPath: '/programming-classroom',
+      publicPath: publicPath,
       scopeHoisting: true,
       vueRouterMode: 'history',
       env: ctx.dev ? devEnv : prodEnv,
