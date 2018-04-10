@@ -5,14 +5,20 @@ const devEnv = {
   withCredentials: 'true'
 }
 
+const stagingEnv = {
+  apiEndpoint: '"http://powerstar.info:10807"',
+  withCredentials: 'true'
+}
+
 const prodEnv = {
   apiEndpoint: '"http://192.168.1.108:3001"',
   withCredentials: 'true'
 }
 
 module.exports = function (ctx) {
+  const isStaging = process.env.STAGING == 1
   let publicPath = '/programming-classroom';
-  if (process.env.STAGING == 1) {
+  if (isStaging) {
     publicPath = '/programming-classroom-staging';
   }
   console.log(publicPath);
@@ -47,7 +53,7 @@ module.exports = function (ctx) {
       publicPath: publicPath,
       scopeHoisting: true,
       vueRouterMode: 'history',
-      env: ctx.dev ? devEnv : prodEnv,
+      env: ctx.dev ? devEnv : (isStaging ? stagingEnv : prodEnv),
       // gzip: true,
       // analyze: true,
       // extractCSS: false,
